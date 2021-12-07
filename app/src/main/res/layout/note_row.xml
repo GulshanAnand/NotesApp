@@ -40,13 +40,18 @@
                     android:foreground="?android:attr/selectableItemBackground"
                     android:src="@drawable/ic_baseline_delete_24"/>
             </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="3dp"
+                android:background="#676666"/>
             <TextView
                 android:id="@+id/notes_content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="18sp"
                 android:textColor="@color/black"
-                android:layout_marginTop="5dp"/>
+                android:layout_marginTop="7dp"/>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 </LinearLayout>

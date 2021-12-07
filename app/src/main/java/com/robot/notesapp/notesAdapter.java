@@ -1,5 +1,6 @@
 package com.robot.notesapp;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,7 +10,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.room.Room;
 
 import java.util.List;
 
@@ -31,14 +31,24 @@ public class notesAdapter extends RecyclerView.Adapter<notesAdapter.ViewHolder> 
             del.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-//                    int i = getAdapterPosition();
                     int i = getBindingAdapterPosition();
                     notes delNote = localDataSet.get(i);
-                    MainActivity.db = Room.databaseBuilder(view.getContext().getApplicationContext(),
-                            notesDatabase.class, "notes_db").allowMainThreadQueries().build();
                     MainActivity.db.notesDao().delete(delNote);
                     localDataSet.remove(i);
                     notifyItemRemoved(i);
+                }
+            });
+
+            card.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    int i = getBindingAdapterPosition();
+                    notes upNote = localDataSet.get(i);
+                    Intent intent = new Intent(view.getContext(), updateNote.class);
+                    intent.putExtra("NOTE", upNote.note);
+                    intent.putExtra("TITLE", upNote.title);
+                    intent.putExtra("ID", upNote.id);
+                    view.getContext().startActivity(intent);
                 }
             });
         }

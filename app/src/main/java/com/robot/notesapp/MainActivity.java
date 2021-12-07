@@ -17,8 +17,8 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    notesAdapter adapter;
-    RecyclerView recyclerView;
+    public static notesAdapter adapter;
+    public static RecyclerView recyclerView;
     EditText newTitle;
     EditText newNote;
     Button saveButton;

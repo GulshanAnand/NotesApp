@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:padding="7dp"
-    tools:context=".MainActivity">
+    tools:context=".updateNote">
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -20,42 +20,31 @@
             android:padding="9dp"
             android:orientation="vertical">
             <EditText
-                android:id="@+id/new_title_tv"
+                android:id="@+id/edit_title_tv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="22sp"
-                android:textColor="@color/black"
                 android:background="@null"
-                android:hint="Title"
+                android:textColor="@color/black"
                 android:singleLine="true"
-                android:textColorHint="@color/hint_color_card"/>
+                android:textSize="22sp"/>
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:layout_marginTop="6dp"
-                android:background="#676666"/>
+                android:layout_marginTop="7dp"
+                android:background="#5A5959"/>
             <EditText
-                android:id="@+id/new_notes_content"
+                android:id="@+id/edit_note_tv"
                 android:layout_width="match_parent"
+                android:layout_marginTop="10dp"
                 android:layout_height="wrap_content"
                 android:textSize="18sp"
                 android:textColor="@color/black"
-                android:background="@null"
-                android:hint="Take your notes here..."
-                android:textColorHint="@color/hint_color_card"
-                android:layout_marginTop="10dp"/>
+                android:background="@null"/>
+            <Button
+                android:id="@+id/update_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Update"/>
         </LinearLayout>
-
     </androidx.cardview.widget.CardView>
-
-    <Button
-        android:id="@+id/save_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="Save"/>
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
 </LinearLayout>
