@@ -8,6 +8,8 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -15,7 +17,8 @@ public class updateNote extends AppCompatActivity {
 
     EditText editTitle;
     EditText editNote;
-    Button updateButton;
+    ImageView updateButton;
+    ImageView closeButton;
 
     private int id;
     @Override
@@ -25,6 +28,7 @@ public class updateNote extends AppCompatActivity {
         editTitle = findViewById(R.id.edit_title_tv);
         editNote = findViewById(R.id.edit_note_tv);
         updateButton = findViewById(R.id.update_button);
+        closeButton = findViewById(R.id.close_button);
 
         Intent intent = getIntent();
         String title = intent.getStringExtra("TITLE");
@@ -43,11 +47,24 @@ public class updateNote extends AppCompatActivity {
             public void onClick(View view) {
                 String upTitle = editTitle.getText().toString();
                 String upNote = editNote.getText().toString();
+                if(upTitle.isEmpty()){
+                    Toast.makeText(updateNote.this, "Enter a Title", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 MainActivity.db.notesDao().updateNotes(upTitle, upNote, id);
                 List<notes> allnotes = MainActivity.db.notesDao().getAllNotes();
                 MainActivity.adapter = new notesAdapter(allnotes);
                 MainActivity.recyclerView.setAdapter(MainActivity.adapter);
                 hidekeyboard(view);
+                finish();
+            }
+        });
+
+        closeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                hidekeyboard(view);
+                finish();
             }
         });
     }

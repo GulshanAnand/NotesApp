@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import java.util.List;
@@ -21,7 +22,8 @@ public class MainActivity extends AppCompatActivity {
     public static RecyclerView recyclerView;
     EditText newTitle;
     EditText newNote;
-    Button saveButton;
+    ImageView saveButton;
+    ImageView cancelButton;
     public static notesDatabase db;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
         newTitle = findViewById(R.id.new_title_tv);
         newNote = findViewById(R.id.new_notes_content);
         saveButton = findViewById(R.id.save_button);
+        cancelButton = findViewById(R.id.cancel_button);
 
         db = Room.databaseBuilder(getApplicationContext(),
                 notesDatabase.class, "notes_db").allowMainThreadQueries().build();
@@ -54,16 +57,25 @@ public class MainActivity extends AppCompatActivity {
 
                 newTitle.setText("");
                 newNote.setText("");
-                newTitle.clearFocus();
-                newNote.clearFocus();
                 hidekeyboard(view);
                 List<notes> allnotes = noteDao.getAllNotes();
                 startAdapter(allnotes);
             }
         });
+
+        cancelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                newTitle.setText("");
+                newNote.setText("");
+                hidekeyboard(view);
+            }
+        });
     }
 
     private void hidekeyboard(View v) {
+        newTitle.clearFocus();
+        newNote.clearFocus();
         InputMethodManager inputMethodManager = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
         inputMethodManager.hideSoftInputFromWindow(v.getApplicationWindowToken(),0);
     }
