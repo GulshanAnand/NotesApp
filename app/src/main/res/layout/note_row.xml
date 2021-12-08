@@ -42,9 +42,9 @@
             </LinearLayout>
             <View
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
+                android:layout_height="1.2dp"
                 android:layout_marginTop="3dp"
-                android:background="#676666"/>
+                android:background="@color/hint_color_card"/>
             <TextView
                 android:id="@+id/notes_content"
                 android:layout_width="match_parent"
